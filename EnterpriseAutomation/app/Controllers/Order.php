@@ -1,9 +1,16 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\OrderModel;
 
 class Order extends BaseController
 {
+    protected $order;
+    protected $dataOrder;
+    
+    public function __construct() {
+        $this->order = new OrderModel();
+    }
 
     public function index() {
 
@@ -15,7 +22,7 @@ class Order extends BaseController
         return view("pages/order.php", $data);
     }
 
-    public function create()
+    public function createOrder()
     {
         // lakukan validasi
         $validation =  \Config\Services::validation();
