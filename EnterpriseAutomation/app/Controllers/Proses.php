@@ -15,4 +15,15 @@ class Proses extends BaseController
         return view("pages/proses.php", $data);
     }
     
+    public function proses() {
+        $data = [
+            'title' => 'Proses',
+            'nav_active' => 2
+        ];
+
+        return view("pages/proses.php", $data);
+    }
+
+
+
 }
