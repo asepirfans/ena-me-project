@@ -14,38 +14,57 @@ class Order extends BaseController
 
     public function index() {
 
-        $data = [
+        $keyword = $this->request->getVar('keyword') ? $this->request->getVar('keyword') : "";
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = $this->request->getVar('entries') ? $this->request->getVar('entries') : 5;
+
+        $dataOrder = [
             'title' => 'Order',
-            'nav_active' => 2
+            'nav_active' => 2,
+            'getOrder' => $this->order->search($keyword)->paginate($perPage),
+            'latest_id' => $this->order->getLastId(),
+            'pager' => $this->order->pager,
+            'current_page' => $currentPage,
+            'entries' => $perPage,
         ];
 
-        return view("pages/order.php", $data);
+        return view("pages/order", $dataOrder);
     }
-
-    public function createOrder()
+   
+        public function createOrder()
     {
         // lakukan validasi
         $validation =  \Config\Services::validation();
         $validation->setRules([
             'pengorder' => 'required',
-            'tanggal' => 'required',
-            'unit_kerja' => 'required',
-            'batas_waktu' => 'required',
-            'disetujui' => 'required',
-            'no_pembebanan' => 'required',
-            'jumlah_satuan' => 'required',
-            'nama_barang' => 'required',
-            'no_barang' => 'required',
-            'no_gambar' => 'required',
-            'tanggal_penerima' => 'required',
-            'nama_paraf_penerima' => 'required',
-            'berat' => 'required',
-            'tanggal_pelaporan' => 'required',
-            'tanggal_pelaksana_pesanan' => 'required',
-            'nama_paraf_pelaksana_pesanan' => 'required',
-            'catatan' => 'required'
-        ]);
-        
+            'id_ordelog' => 'required'
+        ]); 
+        $isDataValid = $validation->withRequest($this->request)->run(); 
+
+        // Ambil data dari form
+        if($isDataValid){
+            $this->order->insert([
+                'id_worker' => $this->request->getPost('pengorder'),
+                'no_barang' => $this->request->getPost('no_barang'),
+                'no_gambar' => $this->request->getPost('no_gambar'),
+                'tgl_penerima' => $this->request->getPost('tanggal_penerima'),
+                'nama_barang' => $this->request->getPost('nama_barang'),
+                'tgl_pembelian' => $this->request->getPost('tanggal_pembelian'),
+                'berat' => $this->request->getPost('berat'),
+                'record_order' => $this->request->getPost('record_order'),
+                'id_spk' => $this->request->getPost('id_spk')
+            ]); 
+     
+            // call swal fire
+            session()->setFlashdata('input_msg', 'Pesanan berhasil ditambahkan!');
+        } else {
+            session()->setFlashdata('input_msg', 'Pesanan gagal ditambahkan!');
+        }
+
+
+    // tampilkan form create
+    // return view (/pages/order.php)
+    return redirect()->back()->withInput();
     }
-    
+
 }

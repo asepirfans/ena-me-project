@@ -12,15 +12,24 @@ class OrderModel extends Model
 
     // allowed Field
     protected $allowedFields = [
+        'pemesan',
+        'tgl_create',
         'id_worker',
+        'batas_waktu',
+        'disetujui',
+        'id_spk',
+        'jml_satuan',
+        'nama_barang_ukuran',
         'no_barang',
         'no_gambar',
         'tgl_penerima',
-        'nama_barang',
+        'nama_penerima',
         'tgl_pembelian',
         'berat',
+        'tgl_pesan',
         'record_order',
-        'id_spk',
+        'nama_pelaksana',
+        'catatan',
     ];
 
     public function getLastId() {
@@ -45,7 +54,17 @@ class OrderModel extends Model
             ->orLike('tgl_pembelian', $keyword)
             ->orLike('berat', $keyword)
             ->orLike('record_order', $keyword)
-            ->orLike('id_spk', $keyword);
+            ->orLike('id_spk', $keyword)
+            ->orLike('pemesan', $keyword)
+            ->orLike('tgl_create', $keyword)
+            ->orLike('batas_waktu', $keyword)
+            ->orLike('disetujui', $keyword)
+            ->orLike('jml_satuan', $keyword)
+            ->orLike('nama_barang_ukuran', $keyword)
+            ->orLike('nama_penerima', $keyword)
+            ->orLike('tgl_pesan', $keyword)
+            ->orLike('nama_paraf_pelaksana', $keyword)
+            ->orLike('catatan', $keyword);
         } else {
             $orderdata = $this;
         }
@@ -54,4 +73,3 @@ class OrderModel extends Model
     }
 
 }
-

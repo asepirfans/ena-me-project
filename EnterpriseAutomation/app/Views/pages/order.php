@@ -126,7 +126,7 @@ $this->section('content');
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="post" id="createOrder" action="">
+        <form method="post" id="createOrder" action="/Order/createOrder">
             <div class="modal-content">
                 <div class="bg-polman modal-header">
                     <h5 class="text-white poppins-bold modal-title" id="exampleModalLabel">Tambah Order</h5>
@@ -142,15 +142,15 @@ $this->section('content');
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal</label>
-                            <input type="text" class="dateselect form-control" id="">
+                            <input type="text" class="dateselect form-control" id="tgl_create">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Unit Kerja</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="text" class="form-control" id="id_worker">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Batas Waktu</label>
-                            <input type="text" class="dateselect form-control" id="">
+                            <input type="text" class="dateselect form-control" id="batas_waktu">
                         </div>
                     </div>
 
@@ -158,62 +158,62 @@ $this->section('content');
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Disetujui</label>
                             <input type="text" name="" class="form-control"
-                                id="">
+                                id="disetujui">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                            <input type="text" name="" class="form-control" id="">
+                            <input type="text" name="" class="form-control" id="no_spk" name="no_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id), 4, '0', STR_PAD_LEFT);?>">
                         </div>
 
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
-                            <input type="number" name="" class="form-control" id="">
+                            <input type="number" name="" class="form-control" id="jml_satuan">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
-                            <input type="text" name="" class="form-control" id="">
+                            <input type="text" name="" class="form-control" id="nama_barang_ukuran">
                         </div>
                     </div>
 
                     <div class="tab">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Barang</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="text" class="form-control" id="no_gambar">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Gambar</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="text" class="form-control" id="no_gambar">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Penerima</label>
-                            <input type="text" class="dateselect form-control" id="">
+                            <input type="text" class="dateselect form-control" id="tgl_penerima">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama & Paraf Penerima</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="text" class="form-control" id="nama_penerima">
                         </div>
                     </div>
 
                     <div class="tab">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Berat (Kg)</label>
-                            <input type="number" class="form-control" id="">
+                            <input type="number" class="form-control" id="berat">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
-                            <input type="text" class="dateselect form-control" id="">
+                            <input type="text" class="dateselect form-control" id="tgl_pembelian">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
-                            <input type="text" class="dateselect form-control" id="">
+                            <input type="text" class="dateselect form-control" id="tgl_pesan">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="text" class="form-control" id="nama_pelaksana">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Catatan</label>
-                            <textarea class="form-control" id=""> </textarea>
+                            <textarea class="form-control" id="catatan"> </textarea>
                         </div>
                     </div>
 
