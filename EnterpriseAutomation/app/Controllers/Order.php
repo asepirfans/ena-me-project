@@ -31,7 +31,7 @@ class Order extends BaseController
         return view("pages/order", $dataOrder);
     }
    
-        public function createOrder()
+/*         public function createOrder()
     {
         // lakukan validasi
         $validation =  \Config\Services::validation();
@@ -50,7 +50,7 @@ class Order extends BaseController
                 'tgl_penerima' => $this->request->getPost('tanggal_penerima'),
                 'nama_barang' => $this->request->getPost('nama_barang'),
                 'tgl_pembelian' => $this->request->getPost('tanggal_pembelian'),
-                'berat' => $this->request->getPost('berat'),
+                'berat_barang' => $this->request->getPost('berat'),
                 'record_order' => $this->request->getPost('record_order'),
                 'id_spk' => $this->request->getPost('id_spk')
             ]); 
@@ -65,6 +65,27 @@ class Order extends BaseController
     // tampilkan form create
     // return view (/pages/order.php)
     return redirect()->back()->withInput();
+    } */
+
+    public function createOrder() {
+        // Ambil data dari form
+        $this->order->insert([
+            'id_worker' => $this->request->getPost('pengorder'),
+            'no_barang' => $this->request->getPost('no_barang'),
+            'no_gambar' => $this->request->getPost('no_gambar'),
+            'tgl_penerima' => $this->request->getPost('tanggal_penerima'),
+            'nama_barang' => $this->request->getPost('nama_barang'),
+            'tgl_pembelian' => $this->request->getPost('tanggal_pembelian'),
+            'berat_barang' => $this->request->getPost('berat'),
+            'record_order' => $this->request->getPost('record_order'),
+            'id_spk' => $this->request->getPost('id_spk')
+        ]); 
+
+        // call swal fire
+        session()->setFlashdata('input_msg', 'Pesanan berhasil ditambahkan!');
+
+        // Redirect kembali ke halaman sebelumnya atau ke halaman tertentu
+        return redirect()->back()->withInput();
     }
 
 }
