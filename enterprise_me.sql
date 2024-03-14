@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.3.0-dev+20230111.1d37607132
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 03:46 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.5
+-- Host: localhost
+-- Generation Time: Mar 14, 2024 at 07:49 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,15 +30,24 @@ SET time_zone = "+00:00";
 CREATE TABLE `form_order_logistik` (
   `id_orderlog` int(11) NOT NULL,
   `id_worker` int(11) NOT NULL,
+  `pemesan` varchar(255) NOT NULL,
+  `tanggal_created` date NOT NULL,
+  `unit_kerja` varchar(255) NOT NULL,
+  `batas_waktu` date NOT NULL,
+  `disetujui` varchar(255) NOT NULL,
+  `jml_satuan` int(11) NOT NULL,
+  `nama_barang` varchar(255) NOT NULL,
   `no_barang` int(11) NOT NULL,
   `no_gambar` varchar(255) NOT NULL,
   `tgl_penerima` datetime NOT NULL,
   `nama_penerima` varchar(255) NOT NULL,
   `tgl_pembelian` datetime NOT NULL,
-  `berat` int(11) NOT NULL,
+  `tgl_pesanan` date NOT NULL,
+  `berat_barang` int(11) NOT NULL,
+  `nama_pelaksana` varchar(255) NOT NULL,
   `record_order` varchar(255) NOT NULL,
   `id_spk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -53,7 +62,7 @@ CREATE TABLE `form_proses` (
   `id_mesin` int(11) NOT NULL,
   `durasi_waktu` int(11) NOT NULL,
   `komponen` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -65,7 +74,7 @@ CREATE TABLE `mesin` (
   `id_mesin` int(11) NOT NULL,
   `nama_mesin` varchar(255) NOT NULL,
   `no_mesin` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -83,7 +92,7 @@ CREATE TABLE `pengerjaan` (
   `jml_barang` int(11) NOT NULL,
   `wkt_pengerjaan` int(11) NOT NULL,
   `id_worker` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -103,14 +112,14 @@ CREATE TABLE `spk` (
   `no_penawar` varchar(255) DEFAULT NULL,
   `no_order` varchar(255) DEFAULT NULL,
   `no_spk` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `spk`
 --
 
 INSERT INTO `spk` (`id_spk`, `pengorder`, `tgl_selesai`, `tgl_penyerahan`, `nama_produk`, `jml_pesanan`, `gbr_kerja`, `tgl_upm`, `no_penawar`, `no_order`, `no_spk`) VALUES
-(51, 'Rachmat Syaiful M', '2024-03-16', '2024-03-08', 'Gearbox', 15, 'https://boxicons.com/?query=pi', '2024-03-30', 'Q24.0050', '0050/PTR/II/2024', 'PM240050'),
+(51, '', '0000-00-00', '0000-00-00', '', 0, 'https://boxicons.com/?query=pi', NULL, 'Q24.0050', '0050/PTR/II/2024', 'PM240050'),
 (52, 'Thomas Shelby', '2024-03-22', '2024-03-08', 'Shaft', 89, NULL, '2024-03-30', 'Q24.0051', '0051/PTR/II/2024', 'PM240051'),
 (53, 'Uzumaki Agung Tirtayasa', '2024-03-23', '2024-03-08', 'Jubah', 68, NULL, '2024-04-05', 'Q24.0052', '0052/PTR/II/2024', 'PM240052'),
 (58, 'ipman', '2024-03-18', '2024-03-13', 'Gearbox', 1, NULL, '2024-03-27', 'Q24.0053', '0053/PTR/II/2024', 'PM240053'),
@@ -119,7 +128,8 @@ INSERT INTO `spk` (`id_spk`, `pengorder`, `tgl_selesai`, `tgl_penyerahan`, `nama
 (61, 'kol', '2024-03-18', '2024-02-26', 'panah', 1, NULL, '2024-03-26', 'Q24.0060', '0060/PTR/II/2024', 'PM240060'),
 (62, 'adasdas', '2024-03-23', '2024-03-13', 'Gearbox', 3, NULL, '2024-03-30', 'Q24.0061', '0061/PTR/II/2024', 'PM240061'),
 (63, 'yuji', '2024-03-20', '2024-03-12', 'Gearbox', 121, NULL, '2024-03-28', 'Q24.0062', '0062/PTR/II/2024', 'PM240062'),
-(64, 'mizan', '2024-03-30', '2024-03-19', 'Xiaomi', 12, NULL, '2024-03-28', 'Q24.0063', '0063/PTR/II/2024', 'PM240063');
+(64, 'mizan', '2024-03-30', '2024-03-19', 'Xiaomi', 12, NULL, '2024-03-28', 'Q24.0063', '0063/PTR/II/2024', 'PM240063'),
+(66, 'Anton ', '2024-03-29', '2024-03-26', 'Torak', 1, NULL, '2024-03-14', 'Q24.0064', '0064/PTR/II/2024', 'PM240064');
 
 -- --------------------------------------------------------
 
@@ -131,7 +141,7 @@ CREATE TABLE `stok_gudang` (
   `id_stoklogistik` int(11) NOT NULL,
   `tempat_simpan` varchar(255) NOT NULL,
   `jml_komponen` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -145,7 +155,7 @@ CREATE TABLE `worker` (
   `Password` varchar(255) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Role` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -211,7 +221,7 @@ ALTER TABLE `worker`
 -- AUTO_INCREMENT for table `form_order_logistik`
 --
 ALTER TABLE `form_order_logistik`
-  MODIFY `id_orderlog` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_orderlog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form_proses`
@@ -235,7 +245,7 @@ ALTER TABLE `pengerjaan`
 -- AUTO_INCREMENT for table `spk`
 --
 ALTER TABLE `spk`
-  MODIFY `id_spk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_spk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `stok_gudang`
