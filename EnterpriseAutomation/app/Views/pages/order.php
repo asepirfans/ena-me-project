@@ -141,14 +141,14 @@ $this->section('content');
                     <?php $no = 1 + ($entries * ($current_page - 1)); foreach($getOrder as $dataOrder){?>
                         <tr>
                             <td data-label="No" class="text-dark text-center"><?= $no;?></td>
-                            <td data-label="Jumlah" class="text-dark text-center"><?= $order['jml_satuan'] ?></td>
-                            <td data-label="Nama Barang/Uraian/Ukuran" class="text-dark text-center"><?= $order['nama_barang'] ?></td>
-                            <td data-label="No.Barang" class="text-dark text-center"><?= $order['no_barang'] ?></td>
-                            <td data-label="No.Gambar" class="text-dark text-center"><?= $order['no_gambar'] ?></td>
-                            <td data-label="Tanggal Penerima" class="text-dark text-center"><?= $order['tgl_penerima'] ?></td>
-                            <td data-label="Nama Penerima" class="text-dark text-center"><?= $order['nama_penerima'] ?></td>
-                            <td data-label="Berat(kg)" class="text-dark text-center"><?= $order['berat_barang'] ?></td>
-                            <td data-label="Tanggal Pelaporan/Pembelian" class="text-dark text-center"><?= $order['tgl_pembelian'] ?></td>
+                            <td data-label="Jumlah" class="text-dark text-center"><?= $dataOrder['jml_satuan'] ?></td>
+                            <td data-label="Nama Barang/Uraian/Ukuran" class="text-dark text-center"><?= $dataOrder['nama_barang'] ?></td>
+                            <td data-label="No.Barang" class="text-dark text-center"><?= $dataOrder['no_barang'] ?></td>
+                            <td data-label="No.Gambar" class="text-dark text-center"><?= $dataOrder['no_gambar'] ?></td>
+                            <td data-label="Tanggal Penerima" class="text-dark text-center"><?= $dataOrder['tgl_penerima'] ?></td>
+                            <td data-label="Nama Penerima" class="text-dark text-center"><?= $dataOrder['nama_penerima'] ?></td>
+                            <td data-label="Berat(kg)" class="text-dark text-center"><?= $dataOrder['berat_barang'] ?></td>
+                            <td data-label="Tanggal Pelaporan/Pembelian" class="text-dark text-center"><?= $dataOrder['tgl_pembelian'] ?></td>
                             <td data-label="Aksi" class="text-dark text-center">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_info" class="btn btn-edit btn-info">Edit</a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="p-2 btn btn-danger"><i class='fs-4 bx bxs-trash'></i></a>
@@ -217,7 +217,7 @@ $this->section('content');
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
-                            <input type="number" name="" class="form-control" id="jml_satuan">
+                            <input type="number" name="jml_satuan" class="form-control" id="jml_satuan">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
@@ -403,6 +403,49 @@ $this->section('content');
                     <button type="button" class="btn btn-warning btn-edit-allow">Edit</button>
                     <!-- <a class="btn btn-info btn-edit-save">Simpan</a> -->
                     <button type="submit" name="submit" class="btn btn-info">Tambah</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="validation_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="POST" id="validate-form" action="/Order/validateOrder"> <!-- Adjust the action URL to point to the validateOrder function -->
+            <div class="modal-content">
+                <div class="modal-header bg-polman">
+                    <h5 class="modal-title text-white poppins-bold" id="myModalLabel">Validasi</h5>
+                </div>
+
+                <div class="modal-body">
+                    <p class="text-sm">Validasi diperlukan untuk melakukan ACC pada Project</p>
+                        <div class="modal-body">
+                            <p class="text-sm">Validasi diperlukan untuk melakukan ACC pada Project,
+                                silahkan lampirkan link gambar kerja. Link dapat berupa link google drive.</p>
+                            <div class="mb-1">
+                                <label for="disetujui" class="text-uppercase form-label">Disetujui</label>
+                                <select id="disetujui" class="form-control" name="disetujui">
+                                    <option value="">Pilih...</option>
+                                    <option value="1">Ya</option>
+                                    <option value="0">Tidak</option>
+                                </select>
+                            </div>
+                        </div>
+                    <!-- Add a hidden input for the 'disetujui' field -->
+                    <input type="hidden" name="disetujui" value="1">
+                </div>
+
+                <div class="modal-footer">
+                    <div class="row w-100">
+                        <div class="col text-start">
+                            <button type="button" class="btn btn-warning btn-edit-valid">Edit</button>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" name="submit" class="btn btn-info btn-valid">Simpan</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </form>
