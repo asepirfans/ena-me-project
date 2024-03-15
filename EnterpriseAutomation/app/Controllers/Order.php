@@ -28,7 +28,7 @@ class Order extends BaseController
             'entries' => $perPage,
         ];
 
-        return view("pages/order", $dataOrder);
+        return view("/pages/order", $dataOrder);
     }
    
 /*         public function createOrder()
@@ -47,10 +47,10 @@ class Order extends BaseController
                 'id_worker' => $this->request->getPost('pengorder'),
                 'no_barang' => $this->request->getPost('no_barang'),
                 'no_gambar' => $this->request->getPost('no_gambar'),
-                'tgl_penerima' => $this->request->getPost('tanggal_penerima'),
+                'tgl_penerima' => $this->request->getPost('tgl_penerima'),
                 'nama_barang' => $this->request->getPost('nama_barang'),
-                'tgl_pembelian' => $this->request->getPost('tanggal_pembelian'),
-                'berat_barang' => $this->request->getPost('berat'),
+                'tgl_pembelian' => $this->request->getPost('tgl_pembelian'),
+                'berat_barang' => $this->request->getPost('berat_barang'),
                 'record_order' => $this->request->getPost('record_order'),
                 'id_spk' => $this->request->getPost('id_spk')
             ]); 
@@ -67,25 +67,32 @@ class Order extends BaseController
     return redirect()->back()->withInput();
     } */
 
-    public function createOrder() {
-        // Ambil data dari form
-        $this->order->insert([
-            'id_worker' => $this->request->getPost('pengorder'),
-            'no_barang' => $this->request->getPost('no_barang'),
-            'no_gambar' => $this->request->getPost('no_gambar'),
-            'tgl_penerima' => $this->request->getPost('tanggal_penerima'),
-            'nama_barang' => $this->request->getPost('nama_barang'),
-            'tgl_pembelian' => $this->request->getPost('tanggal_pembelian'),
-            'berat_barang' => $this->request->getPost('berat'),
-            'record_order' => $this->request->getPost('record_order'),
-            'id_spk' => $this->request->getPost('id_spk')
-        ]); 
+    public function createOrder()
+    {
+        try {
+            $this->order->insert([
+                'id_worker' => $this->request->getPost('pengorder'),
+                'no_barang' => $this->request->getPost('no_barang'),
+                'no_gambar' => $this->request->getPost('no_gambar'),
+                'tgl_penerima' => $this->request->getPost('tgl_penerima'),
+                'nama_barang' => $this->request->getPost('nama_barang'),
+                'tgl_pembelian' => $this->request->getPost('tgl_pembelian'),
+                'berat_barang' => $this->request->getPost('berat_barang'),
+                'record_order' => $this->request->getPost('record_order'),
+                'id_spk' => $this->request->getPost('id_spk')
+            ]);
 
-        // call swal fire
-        session()->setFlashdata('input_msg', 'Pesanan berhasil ditambahkan!');
+            // Log success message
+            log_message('info', 'Pesanan berhasil ditambahkan!');
+            session()->setFlashdata('input_msg', 'Pesanan berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            // Log error message
+            log_message('error', 'Error: ' . $e->getMessage());
+            session()->setFlashdata('input_msg', 'Pesanan gagal ditambahkan!');
+        }
 
-        // Redirect kembali ke halaman sebelumnya atau ke halaman tertentu
         return redirect()->back()->withInput();
     }
+
 
 }

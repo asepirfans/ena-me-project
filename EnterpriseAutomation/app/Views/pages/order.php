@@ -60,14 +60,53 @@ $this->section('content');
 </div>
 
 <div class="card mt-4">
-    <div class="card-header ">
-        <div class="w-100 d-flex col-4 my-auto text-start">
-            <!-- <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md"><i
-                    class='fs-4 bx bxs-briefcase-alt-2'></i>
-            </div> -->
-            <h4 class="d-flex ms-3 mt-2 poppins-bold mb-0 text-dark">Data Order Logistik</h4>
-        </div>
+    <div class="card-header pe-0">
+        <div class="row">
+            <div class="col col-10 col-lg mb-lg-0 mb-3">
+                <div class="w-100 d-flex my-auto text-start">
+<!--                     <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md"><i
+                            class='fs-4 bx bxs-briefcase-alt-2'></i>
+                    </div> -->
+                    <h4 class="d-flex ms-3 mt-2 poppins-bold mb-0 text-dark">Data Order Logistik</h4>
+                </div>
+            </div>
+            <div class="col pe-0 d-flex  justify-content-lg-end justify-content-center">
+                <div class="row">
+                    <div class="col px-0">
+                        <div
+                            class="ms-md-auto pe-md-3 d-flex align-items-center justify-content-end ms-sm-auto me-lg-0 me-sm-3">
+                            <form action="" id="searchbar" method="GET">
+                                <div class="input-group">
+                                    <input type="text" id="searchbox" class="form-control" placeholder="Type here..."
+                                        name="keyword">
+                                    <button type="submit" class="searchicon px-3 py-auto btn m-0"><i
+                                            class='text-white fs-6 bx bx-search'></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown h-100 w-0">
+                            <button class="h-100 my-auto dropdown-toggle btn btn-info ps-3 pe-2" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Show <?= $entries ?> Data
+                                <span class="ms-2 me-0 pe-0"><i class='bx bxs-chevron-down'></i></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="text-dark text-center dropdown-item" href="/Order?page=1&entries=5">5 Data /
+                                        Halaman</a></li>
+                                <li><a class="text-dark text-center dropdown-item" href="/Order?page=1&entries=10">10 Data
+                                        / Halaman</a></li>
+                                <li><a class="text-dark text-center dropdown-item" href="/Order?page=1&entries=15">15 Data
+                                        / Halaman</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+        </div>
     </div>
     <div class="card-body pt-0 mt-0">
         <div class="table-responsive p-0">
@@ -99,9 +138,9 @@ $this->section('content');
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($getOrder as $order): ?>
+                    <?php $no = 1 + ($entries * ($current_page - 1)); foreach($getOrder as $dataOrder){?>
                         <tr>
-                            <td data-label="No" class="text-dark text-center"><?= $order['id_orderlog'] ?></td>
+                            <td data-label="No" class="text-dark text-center"><?= $no;?></td>
                             <td data-label="Jumlah" class="text-dark text-center"><?= $order['jml_satuan'] ?></td>
                             <td data-label="Nama Barang/Uraian/Ukuran" class="text-dark text-center"><?= $order['nama_barang'] ?></td>
                             <td data-label="No.Barang" class="text-dark text-center"><?= $order['no_barang'] ?></td>
@@ -115,9 +154,12 @@ $this->section('content');
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="p-2 btn btn-danger"><i class='fs-4 bx bxs-trash'></i></a>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                        <?php $no++;}?>
                 </tbody>
             </table>
+        </div>
+        <div class="mt-4">
+            <?= $pager->links() ?>
         </div>
     </div>
 </div>
@@ -206,7 +248,7 @@ $this->section('content');
                     <div class="tab">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Berat (Kg)</label>
-                            <input type="number" class="form-control" id="berat">
+                            <input type="number" class="form-control" id="berat_barang">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
@@ -360,7 +402,7 @@ $this->section('content');
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                     <button type="button" class="btn btn-warning btn-edit-allow">Edit</button>
                     <!-- <a class="btn btn-info btn-edit-save">Simpan</a> -->
-                    <button type="submit" name="submit" class="btn btn-info">Simpan</button>
+                    <button type="submit" name="submitInput" class="btn btn-info">Tambah</button>
                 </div>
             </div>
         </form>
@@ -380,7 +422,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
 <script>
   // Creating response and call Sweet alert 
 
-  const input_response = $('.data-input');
+    const input_response = $('.data-input');
     const edit_response = $('.data-edit');
     const valid_response = $('.data-valid');
     const delete_response = $('.data-delete');
