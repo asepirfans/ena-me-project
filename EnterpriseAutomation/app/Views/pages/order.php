@@ -212,10 +212,9 @@ $this->section('content');
                                 id="disetujui">
                         </div>
                         <div class="mb-1">
-                            <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                            <input type="text" name="" class="form-control" id="id_spk" name="id_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id), 4, '0', STR_PAD_LEFT);?>">
+                            <label for="" class="text-uppercase form-label">No. Pembebanan (id_spk)</label>
+                            <input type="text" class="form-control" id="id_spk" name="id_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id ?? '0'), 4, '0', STR_PAD_LEFT);?>">
                         </div>
-
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
                             <input type="number" name="" class="form-control" id="jml_satuan">
@@ -279,6 +278,7 @@ $this->section('content');
         </form>
     </div>
 </div>
+
 <div class="modal fade" id="confirm-delete" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -313,44 +313,44 @@ $this->section('content');
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Tanggal</label>
-                        <input type="text" class="dateselect form-control" id="">
+                        <input type="text" class="dateselect form-control" id="tgl_created">
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Unit Kerja</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="id_worker">
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Batas Waktu</label>
-                        <input type="text" class="dateselect form-control" id="">
+                        <input type="text" class="dateselect form-control" id="batas_waktu">
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Disetujui</label>
-                        <input type="text" name="" class="form-control" id="">
+                        <input type="text" name="Disetujui" class="form-control" id="disetujui">
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                        <input type="text" name="" class="form-control" id="">
+                        <input type="text" name="No. Pembebanan" class="form-control" id="id_spk">
                     </div>
 
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
-                        <input type="number" name="" class="form-control" id="">
+                        <input type="number" name="jml_satuan" class="form-control" id="jml_satuan">
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
-                        <input type="text" name="" class="form-control" id="">
+                        <input type="text" name="nama_barang" class="form-control" id="nama_barang">
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-1">
                                 <label for="" class="text-uppercase form-label">No. Barang</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="no_barang">
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-1">
                                 <label for="" class="text-uppercase form-label">No. Gambar</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="no_gambar">
                             </div>
                         </div>
                     </div>
@@ -358,42 +358,42 @@ $this->section('content');
                         <div class="col">
                             <div class="mb-1">
                                 <label for="" class="text-uppercase form-label">Tanggal Penerima</label>
-                                <input type="text" class="dateselect form-control" id="">
+                                <input type="text" class="dateselect form-control" id="tgl_penerima">
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-1">
                                 <label for="" class="text-uppercase form-label">Nama & Paraf Penerima</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="nama_penerima">
                             </div>
                         </div>
                     </div>
 
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Berat (Kg)</label>
-                        <input type="number" class="form-control" id="">
+                        <input type="number" class="form-control" id="berat_barang">
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
-                        <input type="text" class="dateselect form-control" id="">
+                        <input type="text" class="dateselect form-control" id="tgl_pembelian">
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-1">
                                 <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
-                                <input type="text" class="dateselect form-control" id="">
+                                <input type="text" class="dateselect form-control" id="tgl_pelaksana">
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-1">
                                 <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="nama_pelaksana">
                             </div>
                         </div>
                     </div>
                     <div class="mb-1">
                         <label for="" class="text-uppercase form-label">Catatan</label>
-                        <textarea class="form-control" id=""> </textarea>
+                        <textarea class="form-control" id="catatan"> </textarea>
                     </div>
 
                 </div>
@@ -402,12 +402,13 @@ $this->section('content');
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                     <button type="button" class="btn btn-warning btn-edit-allow">Edit</button>
                     <!-- <a class="btn btn-info btn-edit-save">Simpan</a> -->
-                    <button type="submit" name="submitInput" class="btn btn-info">Tambah</button>
+                    <button type="submit" name="submit" class="btn btn-info">Tambah</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+                   
 
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
@@ -500,30 +501,47 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
 
         $('.btn-edit').on('click', function () {
 
-            // get data from button edit
-            const id = $(this).data('idspk');
-            const nospk = $(this).data('nospk');
-            const pengorder = $(this).data('pengorder');
-            const tglselesai = $(this).data('tglsel');
-            const tglpenyerahan = $(this).data('tglserah');
-            const nama = $(this).data('namaprod');
-            const jml = $(this).data('jml');
-            const url = $(this).data('href');
-            const penawar = $(this).data('penawaran');
-            const order = $(this).data('order');
-            const tglupm = $(this).data('upm');
+            // Get data from button edit
+            const id_orderlog = $(this).data('id_orderlog');
+            const pemesan = $(this).data('pemesan');
+            const tgl_created = $(this).data('tgl_created');
+            const id_worker = $(this).data('id_worker');
+            const batas_waktu = $(this).data('batas_waktu');
+            const disetujui = $(this).data('disetujui');
+            const id_spk = $(this).data('id_spk');
+            const jml_satuan = $(this).data('jml_satuan');
+            const nama_barang = $(this).data('nama_barang');
+            const no_barang = $(this).data('no_barang');
+            const no_gambar = $(this).data('no_gambar');
+            const tgl_penerima = $(this).data('tgl_penerima');
+            const nama_penerima = $(this).data('nama_penerima');
+            const tgl_pembelian = $(this).data('tgl_pembelian');
+            const berat_barang = $(this).data('berat_barang');
+            const tgl_pesanan = $(this).data('tgl_pesanan');
+            const record_order = $(this).data('record_order');
+            const nama_pelaksana = $(this).data('nama_pelaksana');
+            const catatan = $(this).data('catatan');
 
             // Set data to Form Edit
-            $('#edit_id_spk').val(nospk);
-            $('#idspk').val(id);
-            $('#edit_pengorder').val(pengorder);
-            $('#edit_tgl_selesai').val(tglselesai);
-            $('#edit_tgl_penyerahan').val(tglpenyerahan);
-            $('#edit_nama_produk').val(nama);
-            $('#edit_jml_pesanan').val(jml);
-            $('#edit_no_penawar').val(penawar);
-            $('#edit_no_order').val(order);
-            $('#edit_tgl_upm').val(tglupm);
+            $('#edit_id_orderlog').val(id_orderlog);
+            $('#edit_pemesan').val(pemesan);
+            $('#edit_tgl_created').val(tgl_created);
+            $('#edit_id_worker').val(id_worker);
+            $('#edit_batas_waktu').val(batas_waktu);
+            $('#edit_disetujui').val(disetujui);
+            $('#edit_id_spk').val(id_spk);
+            $('#edit_jml_satuan').val(jml_satuan);
+            $('#edit_nama_barang').val(nama_barang);
+            $('#edit_no_barang').val(no_barang);
+            $('#edit_no_gambar').val(no_gambar);
+            $('#edit_tgl_penerima').val(tgl_penerima);
+            $('#edit_nama_penerima').val(nama_penerima);
+            $('#edit_tgl_pembelian').val(tgl_pembelian);
+            $('#edit_berat_barang').val(berat_barang);
+            $('#edit_tgl_pesanan').val(tgl_pesanan);
+            $('#edit_record_order').val(record_order);
+            $('#edit_nama_pelaksana').val(nama_pelaksana);
+            $('#edit_catatan').val(catatan);
 
             // Call Modal Edit
             $('#modal_info').modal('show');

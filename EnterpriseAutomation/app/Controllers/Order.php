@@ -31,7 +31,7 @@ class Order extends BaseController
         return view("/pages/order", $dataOrder);
     }
    
-/*         public function createOrder()
+        public function createOrder()
     {
         // lakukan validasi
         $validation =  \Config\Services::validation();
@@ -65,12 +65,26 @@ class Order extends BaseController
     // tampilkan form create
     // return view (/pages/order.php)
     return redirect()->back()->withInput();
-    } */
+    }
 
-    public function createOrder()
+    public function editOrder()
     {
-        try {
-            $this->order->insert([
+        // Ambil data order yang akan diedit
+        $id = $this->request->getVar('id_orderlog');
+
+        
+        // Lakukan validasi, 
+        // jika data valid, maka simpan ke database
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'pengorder' => 'required',
+            'id_ordelog' => 'required'
+        ]);
+        $isDataValid = $validation->withRequest($this->request)->run();
+
+        //jika data valid, simpan ke database dan update
+        if($isDataValid){
+            $this->order->update($id, [
                 'id_worker' => $this->request->getPost('pengorder'),
                 'no_barang' => $this->request->getPost('no_barang'),
                 'no_gambar' => $this->request->getPost('no_gambar'),
@@ -81,18 +95,41 @@ class Order extends BaseController
                 'record_order' => $this->request->getPost('record_order'),
                 'id_spk' => $this->request->getPost('id_spk')
             ]);
-
-            // Log success message
-            log_message('info', 'Pesanan berhasil ditambahkan!');
-            session()->setFlashdata('input_msg', 'Pesanan berhasil ditambahkan!');
-        } catch (\Exception $e) {
-            // Log error message
-            log_message('error', 'Error: ' . $e->getMessage());
-            session()->setFlashdata('input_msg', 'Pesanan gagal ditambahkan!');
+            session()->setFlashdata('input_msg', 'Pesanan berhasil diubah!');
+        } else {
+            session()->setFlashdata('input_msg', 'Pesanan gagal diubah!');
         }
 
+        // tampilkan form edit
         return redirect()->back()->withInput();
     }
 
 
+    public function deleteOrder($id)
+    {
+        $this->order->delete($id);
+        session()->setFlashdata('input_msg', 'Pesanan berhasil dihapus!');
+        return redirect()->back();
+    }
+
+    public function validateOrder($id)
+    {
+
+    $validation =  \Config\Services::validation();
+    $validation->setRules([
+        'disetujui' => 'required'
+    ]);
+    $isDataValid = $validation->withRequest($this->request)->run();
+
+    if($isDataValid){
+        $this->order->update($id, [
+            'disetujui' => 1
+        ]);
+        session()->setFlashdata('input_msg', 'Pesanan berhasil disetujui!');
+    } else {
+        session()->setFlashdata('input_msg', 'Pesanan gagal disetujui!');
+    }
+
+    return redirect()->back()->withInput();
+    }
 }
