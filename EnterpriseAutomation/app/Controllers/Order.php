@@ -37,7 +37,7 @@ class Order extends BaseController
         $validation =  \Config\Services::validation();
         $validation->setRules([
             'pengorder' => 'required',
-            'id_ordelog' => 'required'
+            'id_orderlog' => 'required'
         ]); 
         $isDataValid = $validation->withRequest($this->request)->run(); 
 
@@ -78,7 +78,7 @@ class Order extends BaseController
         $validation =  \Config\Services::validation();
         $validation->setRules([
             'pengorder' => 'required',
-            'id_ordelog' => 'required'
+            'id_orderlog' => 'required'
         ]);
         $isDataValid = $validation->withRequest($this->request)->run();
 

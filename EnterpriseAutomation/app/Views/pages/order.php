@@ -174,7 +174,7 @@ $this->section('content');
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="post" id="createOrder" action="/Order/createOrder">
+        <form method="post" id="tambahOrder" action="/Order/createOrder">
             <div class="modal-content">
                 <div class="bg-polman modal-header">
                     <h5 class="text-white poppins-bold modal-title" id="exampleModalLabel">Tambah Order</h5>
@@ -207,12 +207,15 @@ $this->section('content');
 
                     <div class="tab">
                         <div class="mb-1">
-                            <label for="" class="text-uppercase form-label">Disetujui</label>
-                            <input type="text" name="" class="form-control"
-                                id="disetujui">
+                            <label for="disetujui" class="text-uppercase form-label">Disetujui</label>
+                            <select name="approval_status" class="form-control" id="disetujui">
+                                <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
+                                <option value="2">Belum Disetujui</option>
+                            </select>
                         </div>
                         <div class="mb-1">
-                            <label for="" class="text-uppercase form-label">No. Pembebanan (id_spk)</label>
+                            <label for="" class="text-uppercase form-label">No. Pembebanan</label>
                             <input type="text" class="form-control" id="id_spk" name="id_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id ?? '0'), 4, '0', STR_PAD_LEFT);?>">
                         </div>
                         <div class="mb-1">
@@ -270,9 +273,9 @@ $this->section('content');
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-secondary" id="prevBtn"
-                        onclick="nextPrev(-1)">Previous</button>
-                    <button type="button" class="btn btn-info" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    <button type="button" class="btn btn-secondary" id="prevBtn">Previous</button>
+                    <button type="button" class="btn btn-info" id="nextBtn">Next</button>
+                    <button type="submit" id="submitInput" name="submit" class="btn btn-info">Tambah</button>
                 </div>
             </div>
         </form>
@@ -301,108 +304,120 @@ $this->section('content');
 
 <div class="modal fade" id="modal_info" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="POST" id="edit-form" action="">
+        <form method="POST" id="edit-form" action="/Order/editOrder">
             <div class="modal-content">
                 <div class="modal-header bg-polman">
                     <h5 class="modal-title text-white poppins-bold" id="">Edit Data Order</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Pemesan</label>
-                        <input type="text" name="pengorder" class="form-control" id="pengorder">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Tanggal</label>
-                        <input type="text" class="dateselect form-control" id="tgl_created">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Unit Kerja</label>
-                        <input type="text" class="form-control" id="id_worker">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Batas Waktu</label>
-                        <input type="text" class="dateselect form-control" id="batas_waktu">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Disetujui</label>
-                        <input type="text" name="Disetujui" class="form-control" id="disetujui">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                        <input type="text" name="No. Pembebanan" class="form-control" id="id_spk">
-                    </div>
+                    <div class="tab_edit">
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Pemesan</label>
+                            <input type="text" name="pengorder" class="form-control" id="edit_pemesan">
+                        </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Tanggal</label>
+                            <input type="text" class="dateselect form-control" id="edit_tgl_created">
+                        </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Unit Kerja</label>
+                            <input type="text" class="form-control" id="edit_id_worker">
+                        </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Batas Waktu</label>
+                            <input type="text" class="dateselect form-control" id="edit_batas_waktu">
+                        </div>
+                    </div>    
+                    <div class="tab_edit">
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Disetujui</label>
+                            <input type="text" name="Disetujui" class="form-control" id="edit_disetujui">
+                        </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">No. Pembebanan</label>
+                            <input type="text" name="No. Pembebanan" class="form-control" id="edit_id_spk">
+                        </div>
 
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
-                        <input type="number" name="jml_satuan" class="form-control" id="jml_satuan">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
-                        <input type="text" name="nama_barang" class="form-control" id="nama_barang">
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-1">
-                                <label for="" class="text-uppercase form-label">No. Barang</label>
-                                <input type="text" class="form-control" id="no_barang">
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
+                            <input type="number" name="jml_satuan" class="form-control" id="edit_jml_satuan">
+                        </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
+                            <input type="text" name="nama_barang" class="form-control" id="edit_nama_barang">
+                        </div>
+                    </div> 
+                    <div class="tab_edit">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-1">
+                                    <label for="" class="text-uppercase form-label">No. Barang</label>
+                                    <input type="text" class="form-control" id="edit_no_barang">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-1">
+                                    <label for="" class="text-uppercase form-label">No. Gambar</label>
+                                    <input type="text" class="form-control" id="edit_no_gambar">
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="mb-1">
-                                <label for="" class="text-uppercase form-label">No. Gambar</label>
-                                <input type="text" class="form-control" id="no_gambar">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-1">
+                                    <label for="" class="text-uppercase form-label">Tanggal Penerima</label>
+                                    <input type="text" class="dateselect form-control" id="edit_tgl_penerima">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-1">
+                                    <label for="" class="text-uppercase form-label">Nama & Paraf Penerima</label>
+                                    <input type="text" class="form-control" id="edit_nama_penerima">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-1">
-                                <label for="" class="text-uppercase form-label">Tanggal Penerima</label>
-                                <input type="text" class="dateselect form-control" id="tgl_penerima">
+                    </div> 
+                    <div class="tab_edit">
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Berat (Kg)</label>
+                            <input type="number" class="form-control" id="edit_berat_barang">
+                        </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
+                            <input type="text" class="dateselect form-control" id="edit_tgl_pembelian">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-1">
+                                    <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
+                                    <input type="text" class="dateselect form-control" id="edit_tgl_pelaksana">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-1">
+                                    <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
+                                    <input type="text" class="form-control" id="edit_nama_pelaksana">
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="mb-1">
-                                <label for="" class="text-uppercase form-label">Nama & Paraf Penerima</label>
-                                <input type="text" class="form-control" id="nama_penerima">
-                            </div>
+                        <div class="mb-1">
+                            <label for="" class="text-uppercase form-label">Catatan</label>
+                            <textarea class="form-control" id="edit_catatan"> </textarea>
                         </div>
                     </div>
-
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Berat (Kg)</label>
-                        <input type="number" class="form-control" id="berat_barang">
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
-                        <input type="text" class="dateselect form-control" id="tgl_pembelian">
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-1">
-                                <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
-                                <input type="text" class="dateselect form-control" id="tgl_pelaksana">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-1">
-                                <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
-                                <input type="text" class="form-control" id="nama_pelaksana">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-1">
-                        <label for="" class="text-uppercase form-label">Catatan</label>
-                        <textarea class="form-control" id="catatan"> </textarea>
-                    </div>
-
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-warning btn-edit-allow">Edit</button>
-                    <!-- <a class="btn btn-info btn-edit-save">Simpan</a> -->
-                    <button type="submit" name="submit" class="btn btn-info">Tambah</button>
+                <div class="row w-100">
+                        <div class="col text-start">
+                            <button type="button" class="btn btn-warning btn-edit-allow">Edit</button>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-secondary" id="prevBtn_edit">Previous</button>
+                            <button type="button" class="btn btn-info" id="nextBtn_edit">Next</button>
+                            <button type="submit" name="submit" class="btn btn-info">Tambah</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
