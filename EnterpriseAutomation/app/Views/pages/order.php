@@ -191,16 +191,16 @@ $this->section('content');
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal</label>
-                            <input type="text" class="dateselect form-control" id="tgl_create"
+                            <input type="text" name="tgl_created" class="dateselect form-control" id="tgl_create"
                                 placeholder="Masukkan Tanggal (YYYY/MM/DD)">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Unit Kerja</label>
-                            <input type="text" class="form-control" id="id_worker">
+                            <input type="text" name="unit_kerja" class="form-control" id="unit_kerja">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Batas Waktu</label>
-                            <input type="text" class="dateselect form-control" id="batas_waktu"
+                            <input type="text" name="batas_waktu"  class="dateselect form-control" id="batas_waktu"
                                 placeholder="Masukkan Batas Waktu (YYYY/MM/DD">
                         </div>
                     </div>
@@ -208,7 +208,7 @@ $this->section('content');
                     <div class="tab">
                         <div class="mb-1">
                             <label for="disetujui" class="text-uppercase form-label">Disetujui</label>
-                            <select name="approval_status" class="form-control" id="disetujui">
+                            <select name="approval_status" name="disetujui" class="form-control" id="disetujui">
                                 <option value="1">Ya</option>
                                 <option value="0">Tidak</option>
                                 <option value="2">Belum Disetujui</option>
@@ -224,49 +224,49 @@ $this->section('content');
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
-                            <input type="text" name="" class="form-control" id="nama_barang_ukuran">
+                            <input type="text" name="nama_barang" class="form-control" id="nama_barang">
                         </div>
                     </div>
 
                     <div class="tab">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Barang</label>
-                            <input type="text" class="form-control" id="no_gambar">
+                            <input type="text" name="no_barang"  class="form-control" id="no_barang">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Gambar</label>
-                            <input type="text" class="form-control" id="no_gambar">
+                            <input type="text" name="no_gambar"  class="form-control" id="no_gambar">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Penerima</label>
-                            <input type="text" class="dateselect form-control" id="tgl_penerima">
+                            <input type="text" name="tgl_penerima" class="dateselect form-control" id="tgl_penerima">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama & Paraf Penerima</label>
-                            <input type="text" class="form-control" id="nama_penerima">
+                            <input type="text" name="nama_penerima" class="form-control" id="nama_penerima">
                         </div>
                     </div>
 
                     <div class="tab">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Berat (Kg)</label>
-                            <input type="number" class="form-control" id="berat_barang">
+                            <input type="number" name="berat_barang"  class="form-control" id="berat_barang">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
-                            <input type="text" class="dateselect form-control" id="tgl_pembelian">
+                            <input type="text"  name="tgl_pembelian" class="dateselect form-control" id="tgl_pembelian">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
-                            <input type="text" class="dateselect form-control" id="tgl_pesan">
+                            <input type="text" name="tgl_pesan" class="dateselect form-control" id="tgl_pesan">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
-                            <input type="text" class="form-control" id="nama_pelaksana">
+                            <input type="text" name="nama_pelaksana" class="form-control" id="nama_pelaksana">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Catatan</label>
-                            <textarea class="form-control" id="catatan"> </textarea>
+                            <textarea class="form-control" name="catatan" id="catatan"> </textarea>
                         </div>
                     </div>
 
