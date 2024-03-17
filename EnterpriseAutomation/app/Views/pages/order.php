@@ -216,8 +216,8 @@ $this->section('content');
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                            <input type="text" class="form-control" id="id_spk" name="id_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id ?? '0'), 4, '0', STR_PAD_LEFT);?>">
-                        </div>
+                            <input type="text" class="form-control" id="id_spk" name="no_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id ?? '0'), 4, '0', STR_PAD_LEFT);?>">
+                        </div>  
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
                             <input type="number" name="jml_satuan" class="form-control" id="jml_satuan">
@@ -566,7 +566,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
             const id_worker = $(this).data('id_worker');
             const batas_waktu = $(this).data('batas_waktu');
             const disetujui = $(this).data('disetujui');
-            const id_spk = $(this).data('id_spk');
+            const id = $(this).data('id_spk');
+            const nospk = $(this).data('nospk');
             const jml_satuan = $(this).data('jml_satuan');
             const nama_barang = $(this).data('nama_barang');
             const no_barang = $(this).data('no_barang');
@@ -587,7 +588,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
             $('#edit_id_worker').val(id_worker);
             $('#edit_batas_waktu').val(batas_waktu);
             $('#edit_disetujui').val(disetujui);
-            $('#edit_id_spk').val(id_spk);
+            $('#edit_id_spk').val(nospk);
+            $('#idspk').val(id);
             $('#edit_jml_satuan').val(jml_satuan);
             $('#edit_nama_barang').val(nama_barang);
             $('#edit_no_barang').val(no_barang);

@@ -9,12 +9,12 @@ class OrderModel extends Model
     protected $table = "form_order_logistik";
     protected $primaryKey = "id_orderlog";
     protected $allowedFields = [
-        'pemesan',
+        'pengorder',
         'tgl_created',
         'id_worker',
         'batas_waktu',
         'disetujui',
-        'id_spk',
+        'no_spk',
         'jml_satuan',
         'nama_barang',
         'no_barang',
@@ -47,7 +47,7 @@ class OrderModel extends Model
                 ->orLike('tgl_pembelian', $keyword)
                 ->orLike('berat_barang', $keyword) // Menyesuaikan dengan nama kolom yang benar
                 ->orLike('record_order', $keyword)
-                ->orLike('id_spk', $keyword)
+                ->orLike('no_spk', $keyword)
                 ->orLike('pemesan', $keyword)
                 ->orLike('tgl_created', $keyword) // Menyesuaikan dengan nama kolom yang benar
                 ->orLike('batas_waktu', $keyword)

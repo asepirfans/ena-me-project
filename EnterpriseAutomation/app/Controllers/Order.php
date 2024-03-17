@@ -36,15 +36,14 @@ class Order extends BaseController
         // lakukan validasi
         $validation =  \Config\Services::validation();
         $validation->setRules([
-            'pengorder' => 'required',
-            'id_orderlog' => 'required'
+            'pengorder' => 'required'
         ]); 
         $isDataValid = $validation->withRequest($this->request)->run(); 
 
         // Ambil data dari form
         if($isDataValid){
             $this->order->insert([
-                'id_worker' => $this->request->getPost('pengorder'),
+                'id_worker' => $this->request->getPost('id_worker'),
                 'no_barang' => $this->request->getPost('no_barang'),
                 'no_gambar' => $this->request->getPost('no_gambar'),
                 'tgl_penerima' => $this->request->getPost('tgl_penerima'),
@@ -52,7 +51,7 @@ class Order extends BaseController
                 'tgl_pembelian' => $this->request->getPost('tgl_pembelian'),
                 'berat_barang' => $this->request->getPost('berat_barang'),
                 'record_order' => $this->request->getPost('record_order'),
-                'id_spk' => $this->request->getPost('id_spk')
+                'no_spk' => $this->request->getPost('no_spk')
             ]); 
      
             // call swal fire
@@ -77,7 +76,6 @@ class Order extends BaseController
         // jika data valid, maka simpan ke database
         $validation =  \Config\Services::validation();
         $validation->setRules([
-            'pengorder' => 'required',
             'id_orderlog' => 'required'
         ]);
         $isDataValid = $validation->withRequest($this->request)->run();
@@ -85,15 +83,12 @@ class Order extends BaseController
         //jika data valid, simpan ke database dan update
         if($isDataValid){
             $this->order->update($id, [
-                'id_worker' => $this->request->getPost('pengorder'),
-                'no_barang' => $this->request->getPost('no_barang'),
-                'no_gambar' => $this->request->getPost('no_gambar'),
+                "pengorder" => $this->request->getPost('edit_pengorder'),
                 'tgl_penerima' => $this->request->getPost('tgl_penerima'),
                 'nama_barang' => $this->request->getPost('nama_barang'),
                 'tgl_pembelian' => $this->request->getPost('tgl_pembelian'),
                 'berat_barang' => $this->request->getPost('berat_barang'),
                 'record_order' => $this->request->getPost('record_order'),
-                'id_spk' => $this->request->getPost('id_spk')
             ]);
             session()->setFlashdata('input_msg', 'Pesanan berhasil diubah!');
         } else {
