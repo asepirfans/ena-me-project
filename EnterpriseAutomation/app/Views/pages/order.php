@@ -150,8 +150,28 @@ $this->section('content');
                             <td data-label="Berat(kg)" class="text-dark text-center"><?= $dataOrder['berat_barang'] ?></td>
                             <td data-label="Tanggal Pelaporan/Pembelian" class="text-dark text-center"><?= $dataOrder['tgl_pembelian'] ?></td>
                             <td data-label="Aksi" class="text-dark text-center">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal_info" class="btn btn-edit btn-info">Edit</a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="p-2 btn btn-danger"><i class='fs-4 bx bxs-trash'></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal_info" class="btn btn-edit btn-info"
+                                data-href="
+                                data-id_orderlog="<?=$dataOrder['id_orderlog']?>"
+                                data-pemesan="<?=$dataOrder['pengorder']?>"
+                                data-tgl_created="<?=$dataOrder['tgl_created']?>"
+                                data-batas_waktu="<?=$dataOrder['batas_waktu']?>"
+                                data-disetujui="<?=$dataOrder['disetujui']?>"
+                                data-nospk="<?=$dataOrder['no_spk']?>"
+                                data-jml_satuan="<?=$dataOrder['jml_satuan']?>"
+                                data-nama_barang="<?=$dataOrder['nama_barang']?>"
+                                data-no_barang="<?=$dataOrder['no_barang']?>"
+                                data-no_gambar="<?=$dataOrder['no_gambar']?>"
+                                data-tgl_penerima="<?=$dataOrder['tgl_penerima']?>"
+                                data-nama_penerima="<?=$dataOrder['nama_penerima']?>"
+                                data-tgl_pembelian="<?=$dataOrder['tgl_pembelian']?>"
+                                data-berat_barang="<?=$dataOrder['berat_barang']?>"
+                                data-tgl_pesanan="<?=$dataOrder['tgl_pesanan']?>"
+                                data-record_order="<?=$dataOrder['record_order']?>"
+                                data-nama_pelaksana="<?=$dataOrder['nama_pelaksana']?>"
+                                data-catatan="<?=$dataOrder['catatan']?>"
+                                ">Edit</a>
+                                <a href="#"  data-href="/Order/deleteOrder/<?=$dataOrder['id_orderlog']?>" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="p-2 btn btn-danger"><i class='fs-4 bx bxs-trash'></i></a>
                             </td>
                         </tr>
                         <?php $no++;}?>
@@ -258,7 +278,7 @@ $this->section('content');
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
-                            <input type="text" name="tgl_pesan" class="dateselect form-control" id="tgl_pesan">
+                            <input type="text" name="tgl_pesanan" class="dateselect form-control" id="tgl_pesanan">
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
@@ -307,58 +327,68 @@ $this->section('content');
         <form method="POST" id="edit-form" action="/Order/editOrder">
             <div class="modal-content">
                 <div class="modal-header bg-polman">
-                    <h5 class="modal-title text-white poppins-bold" id="">Edit Data Order</h5>
+                    <h5 class="modal-title text-white poppins-bold" id="">Info Order</h5>
                 </div>
                 <div class="modal-body">
                     <div class="tab_edit">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Pemesan</label>
-                            <input type="text" name="pengorder" class="form-control" id="edit_pemesan">
+                            <input type="text" name="edit_pengorder" class="form-control" id="edit_pengorder"
+                            disabled>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal</label>
-                            <input type="text" class="dateselect form-control" id="edit_tgl_created">
+                            <input type="text" name="edit_tgl_created" class="dateselect form-control" id="edit_tgl_created"
+                            disabled>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Unit Kerja</label>
-                            <input type="text" class="form-control" id="edit_id_worker">
+                            <input type="text" name="edit_unit_kerja" class="form-control" id="edit_unit_kerja"
+                            disabled>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Batas Waktu</label>
-                            <input type="text" class="dateselect form-control" id="edit_batas_waktu">
+                            <input type="text" name="edit_batas_waktu" class="dateselect form-control" id="edit_batas_waktu"
+                            disabled>
                         </div>
                     </div>    
                     <div class="tab_edit">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Disetujui</label>
-                            <input type="text" name="Disetujui" class="form-control" id="edit_disetujui">
+                            <input type="text" name="edit_disetujui" class="form-control" id="edit_disetujui"
+                            disabled>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                            <input type="text" name="No. Pembebanan" class="form-control" id="edit_id_spk">
+                            <input type="text" name="edit_no_spk" class="form-control" id="edit_no_spk"
+                            disabled>
                         </div>
 
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
-                            <input type="number" name="jml_satuan" class="form-control" id="edit_jml_satuan">
+                            <input type="number" name="edit_jml_satuan" class="form-control" id="edit_jml_satuan"
+                            disabled>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Nama Barang/Uraian/Ukuran</label>
-                            <input type="text" name="nama_barang" class="form-control" id="edit_nama_barang">
+                            <input type="text" name="edit_nama_barang" class="form-control" id="edit_nama_barang"
+                            disabled>
                         </div>
                     </div> 
                     <div class="tab_edit">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-1">
-                                    <label for="" class="text-uppercase form-label">No. Barang</label>
-                                    <input type="text" class="form-control" id="edit_no_barang">
+                                    <label for="" class="text-uppercase form-label">edit_no_barang</label>
+                                    <input type="text" class="form-control" id="edit_no_barang"
+                                    disabled>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-1">
-                                    <label for="" class="text-uppercase form-label">No. Gambar</label>
-                                    <input type="text" class="form-control" id="edit_no_gambar">
+                                    <label for="" class="text-uppercase form-label">edit_no_gambar</label>
+                                    <input type="text" class="form-control" id="edit_no_gambar"
+                                    disabled>
                                 </div>
                             </div>
                         </div>
@@ -366,13 +396,15 @@ $this->section('content');
                             <div class="col">
                                 <div class="mb-1">
                                     <label for="" class="text-uppercase form-label">Tanggal Penerima</label>
-                                    <input type="text" class="dateselect form-control" id="edit_tgl_penerima">
+                                    <input type="text" name="edit_tgl_penerima" class="dateselect form-control" id="edit_tgl_penerima"
+                                    disabled>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-1">
                                     <label for="" class="text-uppercase form-label">Nama & Paraf Penerima</label>
-                                    <input type="text" class="form-control" id="edit_nama_penerima">
+                                    <input type="text" name="edit_nama_penerima" class="form-control" id="edit_nama_penerima"
+                                    disabled>
                                 </div>
                             </div>
                         </div>
@@ -380,29 +412,40 @@ $this->section('content');
                     <div class="tab_edit">
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Berat (Kg)</label>
-                            <input type="number" class="form-control" id="edit_berat_barang">
+                            <input type="number"
+                            name="edit_berat_barang" class="form-control" id="edit_berat_barang"
+                            disabled>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Tanggal Pelaporan/Pembelian</label>
-                            <input type="text" class="dateselect form-control" id="edit_tgl_pembelian">
+                            <input type="text" name="edit_tgl_pembelian" class="dateselect form-control" id="edit_tgl_pembelian"
+                            disabled>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="mb-1">
                                     <label for="" class="text-uppercase form-label">Tanggal Pelaksana Pesanan</label>
-                                    <input type="text" class="dateselect form-control" id="edit_tgl_pelaksana">
+                                    <input type="text" class="dateselect form-control"
+                                    name="edit_tgl_pembelian" id="edit_tgl_pelaksana"
+                                    disabled>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-1">
                                     <label for="" class="text-uppercase form-label">Nama & Paraf Pelaksana Pesanan</label>
-                                    <input type="text" class="form-control" id="edit_nama_pelaksana">
+                                    <input type="text" 
+                                    name="edit_nama_pelaksana"
+                                    class="form-control" id="edit_nama_pelaksana"
+                                    disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Catatan</label>
-                            <textarea class="form-control" id="edit_catatan"> </textarea>
+                            <textarea class="form-control" 
+                            name="edit_catatan"
+                            id="edit_catatan"
+                            disabled> </textarea>
                         </div>
                     </div>
                 </div>
@@ -410,13 +453,12 @@ $this->section('content');
                 <div class="modal-footer">
                 <div class="row w-100">
                         <div class="col text-start">
-                            <button type="button" class="btn btn-warning btn-edit-allow">Edit</button>
+                            <button type="button" class="btn btn-warning btn-edit-allow"
+                            >Edit</button>
                         </div>
                         <div class="col text-end">
                             <button type="button" class="btn btn-secondary" id="prevBtn_edit">Previous</button>
                             <button type="button" class="btn btn-info" id="nextBtn_edit">Next</button>
-                            <button type="submit" name="submit" class="btn btn-info">Tambah</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -559,49 +601,50 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
 
         $('.btn-edit').on('click', function () {
 
-            // Get data from button edit
-            const id_orderlog = $(this).data('id_orderlog');
-            const pemesan = $(this).data('pemesan');
-            const tgl_created = $(this).data('tgl_created');
-            const id_worker = $(this).data('id_worker');
-            const batas_waktu = $(this).data('batas_waktu');
-            const disetujui = $(this).data('disetujui');
-            const id = $(this).data('id_spk');
-            const nospk = $(this).data('nospk');
-            const jml_satuan = $(this).data('jml_satuan');
-            const nama_barang = $(this).data('nama_barang');
-            const no_barang = $(this).data('no_barang');
-            const no_gambar = $(this).data('no_gambar');
-            const tgl_penerima = $(this).data('tgl_penerima');
-            const nama_penerima = $(this).data('nama_penerima');
-            const tgl_pembelian = $(this).data('tgl_pembelian');
-            const berat_barang = $(this).data('berat_barang');
-            const tgl_pesanan = $(this).data('tgl_pesanan');
-            const record_order = $(this).data('record_order');
-            const nama_pelaksana = $(this).data('nama_pelaksana');
-            const catatan = $(this).data('catatan');
+        // Get data from button edit
+        const id_orderlog = $(this).data('id_orderlog');
+        const pemesan = $(this).data('pengorder');
+        const tgl_created = $(this).data('tgl_created');
+        const id_worker = $(this).data('unit_kerja');
+        const batas_waktu = $(this).data('batas_waktu');
+        const disetujui = $(this).data('disetujui');
+        const id = $(this).data('no_spk');
+        const nospk = $(this).data('nospk');
+        const jml_satuan = $(this).data('jml_satuan');
+        const nama_barang = $(this).data('nama_barang');
+        const no_barang = $(this).data('no_barang');
+        const no_gambar = $(this).data('no_gambar');
+        const tgl_penerima = $(this).data('tgl_penerima');
+        const nama_penerima = $(this).data('nama_penerima');
+        const tgl_pembelian = $(this).data('tgl_pembelian');
+        const berat_barang = $(this).data('berat_barang');
+        const tgl_pesanan = $(this).data('tgl_pesanan');
+        const record_order = $(this).data('record_order');
+        const nama_pelaksana = $(this).data('nama_pelaksana');
+        const catatan = $(this).data('catatan');
 
-            // Set data to Form Edit
-            $('#edit_id_orderlog').val(id_orderlog);
-            $('#edit_pemesan').val(pemesan);
-            $('#edit_tgl_created').val(tgl_created);
-            $('#edit_id_worker').val(id_worker);
-            $('#edit_batas_waktu').val(batas_waktu);
-            $('#edit_disetujui').val(disetujui);
-            $('#edit_id_spk').val(nospk);
-            $('#idspk').val(id);
-            $('#edit_jml_satuan').val(jml_satuan);
-            $('#edit_nama_barang').val(nama_barang);
-            $('#edit_no_barang').val(no_barang);
-            $('#edit_no_gambar').val(no_gambar);
-            $('#edit_tgl_penerima').val(tgl_penerima);
-            $('#edit_nama_penerima').val(nama_penerima);
-            $('#edit_tgl_pembelian').val(tgl_pembelian);
-            $('#edit_berat_barang').val(berat_barang);
-            $('#edit_tgl_pesanan').val(tgl_pesanan);
-            $('#edit_record_order').val(record_order);
-            $('#edit_nama_pelaksana').val(nama_pelaksana);
-            $('#edit_catatan').val(catatan);
+        // Set data to Form Edit
+        $('#edit_id_orderlog').val(id_orderlog);
+        $('#edit_pemesan').val(pemesan);
+        $('#edit_tgl_created').val(tgl_created);
+        $('#edit_id_worker').val(id_worker);
+        $('#edit_batas_waktu').val(batas_waktu);
+        $('#edit_disetujui').val(disetujui);
+        $('#edit_id_spk').val(no_spk);
+        $('#idspk').val(id);
+        $('#edit_jml_satuan').val(jml_satuan);
+        $('#edit_nama_barang').val(nama_barang);
+        $('#edit_no_barang').val(no_barang);
+        $('#edit_no_gambar').val(no_gambar);
+        $('#edit_tgl_penerima').val(tgl_penerima);
+        $('#edit_nama_penerima').val(nama_penerima);
+        $('#edit_tgl_pembelian').val(tgl_pembelian);
+        $('#edit_berat_barang').val(berat_barang);
+        $('#edit_tgl_pesanan').val(tgl_pesanan);
+        $('#edit_record_order').val(record_order);
+        $('#edit_nama_pelaksana').val(nama_pelaksana);
+        $('#edit_catatan').val(catatan);
+
 
             // Call Modal Edit
             $('#modal_info').modal('show');

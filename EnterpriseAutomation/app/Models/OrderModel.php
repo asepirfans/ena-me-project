@@ -11,10 +11,9 @@ class OrderModel extends Model
     protected $allowedFields = [
         'pengorder',
         'tgl_created',
-        'id_worker',
+        'unit_kerja',
         'batas_waktu',
         'disetujui',
-        'no_spk',
         'jml_satuan',
         'nama_barang',
         'no_barang',
@@ -22,11 +21,12 @@ class OrderModel extends Model
         'tgl_penerima',
         'nama_penerima',
         'tgl_pembelian',
-        'berat_barang',
         'tgl_pesanan',
-        'record_order',
+        'berat_barang',
         'nama_pelaksana',
+        'record_order',
         'catatan',
+        'no_spk'
     ];
 
     public function getLastId() {
@@ -40,23 +40,24 @@ class OrderModel extends Model
         if($keyword) {
             return $this->table($this->table)
                 ->like('id_worker', $keyword)
-                ->orLike('no_barang', $keyword)
-                ->orLike('no_gambar', $keyword)
-                ->orLike('tgl_penerima', $keyword)
-                ->orLike('nama_barang', $keyword)
-                ->orLike('tgl_pembelian', $keyword)
-                ->orLike('berat_barang', $keyword) // Menyesuaikan dengan nama kolom yang benar
-                ->orLike('record_order', $keyword)
-                ->orLike('no_spk', $keyword)
-                ->orLike('pemesan', $keyword)
-                ->orLike('tgl_created', $keyword) // Menyesuaikan dengan nama kolom yang benar
+                ->orLike('pengorder', $keyword)
+                ->orLike('tgl_created', $keyword)
+                ->orLike('unit_kerja', $keyword)
                 ->orLike('batas_waktu', $keyword)
                 ->orLike('disetujui', $keyword)
                 ->orLike('jml_satuan', $keyword)
-                ->orLike('nama_penerima', $keyword) // Menyesuaikan dengan nama kolom yang benar
-                ->orLike('tgl_pesanan', $keyword) // Menyesuaikan dengan nama kolom yang benar
-                ->orLike('nama_pelaksana', $keyword) // Menyesuaikan dengan nama kolom yang benar
-                ->orLike('catatan', $keyword);
+                ->orLike('nama_barang', $keyword)
+                ->orLike('no_barang', $keyword)
+                ->orLike('no_gambar', $keyword)
+                ->orLike('tgl_penerima', $keyword)
+                ->orLike('nama_penerima', $keyword)
+                ->orLike('tgl_pembelian', $keyword)
+                ->orLike('tgl_pesanan', $keyword)
+                ->orLike('berat_barang', $keyword)
+                ->orLike('nama_pelaksana', $keyword)
+                ->orLike('record_order', $keyword)
+                ->orLike('catatan', $keyword)
+                ->orLike('no_spk', $keyword);
         } else {
             return $this;
         }

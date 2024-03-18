@@ -43,14 +43,23 @@ class Order extends BaseController
         // Ambil data dari form
         if($isDataValid){
             $this->order->insert([
-                'id_worker' => $this->request->getPost('id_worker'),
+                'pengorder' => $this->request->getPost('pengorder'),
+                'tgl_created' => $this->request->getPost('tgl_created'),
+                'unit_kerja' => $this->request->getPost('unit_kerja'),
+                'batas_waktu' => $this->request->getPost('batas_waktu'),
+                'disetujui' => $this->request->getPost('disetujui'),
+                'jml_satuan' => $this->request->getPost('jml_satuan'),
+                'nama_barang' => $this->request->getPost('nama_barang'),
                 'no_barang' => $this->request->getPost('no_barang'),
                 'no_gambar' => $this->request->getPost('no_gambar'),
                 'tgl_penerima' => $this->request->getPost('tgl_penerima'),
-                'nama_barang' => $this->request->getPost('nama_barang'),
+                'nama_penerima' => $this->request->getPost('nama_penerima'),
                 'tgl_pembelian' => $this->request->getPost('tgl_pembelian'),
+                'tgl_pesanan' => $this->request->getPost('tgl_pesanan'),
                 'berat_barang' => $this->request->getPost('berat_barang'),
+                'nama_pelaksana' => $this->request->getPost('nama_pelaksana'),
                 'record_order' => $this->request->getPost('record_order'),
+                'catatan' => $this->request->getPost('catatan'),
                 'no_spk' => $this->request->getPost('no_spk')
             ]); 
      
@@ -76,19 +85,31 @@ class Order extends BaseController
         // jika data valid, maka simpan ke database
         $validation =  \Config\Services::validation();
         $validation->setRules([
-            'id_orderlog' => 'required'
+            'pengorder' => 'required'
         ]);
         $isDataValid = $validation->withRequest($this->request)->run();
 
         //jika data valid, simpan ke database dan update
         if($isDataValid){
             $this->order->update($id, [
-                "pengorder" => $this->request->getPost('edit_pengorder'),
-                'tgl_penerima' => $this->request->getPost('tgl_penerima'),
-                'nama_barang' => $this->request->getPost('nama_barang'),
-                'tgl_pembelian' => $this->request->getPost('tgl_pembelian'),
-                'berat_barang' => $this->request->getPost('berat_barang'),
-                'record_order' => $this->request->getPost('record_order'),
+                'pengorder' => $this->request->getPost('edit_pengorder'),
+                'tgl_created' => $this->request->getPost('edit_tgl_created'),
+                'unit_kerja' => $this->request->getPost('edit_unit_kerja'),
+                'batas_waktu' => $this->request->getPost('edit_batas_waktu'),
+                'disetujui' => $this->request->getPost('edit_disetujui'),
+                'jml_satuan' => $this->request->getPost('edit_jml_satuan'),
+                'nama_barang' => $this->request->getPost('edit_nama_barang'),
+                'no_barang' => $this->request->getPost('edit_no_barang'),
+                'no_gambar' => $this->request->getPost('edit_no_gambar'),
+                'tgl_penerima' => $this->request->getPost('edit_tgl_penerima'),
+                'nama_penerima' => $this->request->getPost('edit_nama_penerima'),
+                'tgl_pembelian' => $this->request->getPost('edit_tgl_pembelian'),
+                'tgl_pesanan' => $this->request->getPost('edit_tgl_pesanan'),
+                'berat_barang' => $this->request->getPost('edit_berat_barang'),
+                'nama_pelaksana' => $this->request->getPost('edit_nama_pelaksana'),
+                'record_order' => $this->request->getPost('edit_record_order'),
+                'catatan' => $this->request->getPost('edit_catatan'),
+                'no_spk' => $this->request->getPost('edit_no_spk')
             ]);
             session()->setFlashdata('input_msg', 'Pesanan berhasil diubah!');
         } else {
@@ -103,7 +124,7 @@ class Order extends BaseController
     public function deleteOrder($id)
     {
         $this->order->delete($id);
-        session()->setFlashdata('input_msg', 'Pesanan berhasil dihapus!');
+        session()->setFlashdata('del_msg','success');
         return redirect()->back();
     }
 
