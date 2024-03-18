@@ -151,10 +151,10 @@ $this->section('content');
                             <td data-label="Tanggal Pelaporan/Pembelian" class="text-dark text-center"><?= $dataOrder['tgl_pembelian'] ?></td>
                             <td data-label="Aksi" class="text-dark text-center">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_info" class="btn btn-edit btn-info"
-                                data-href="
                                 data-id_orderlog="<?=$dataOrder['id_orderlog']?>"
-                                data-pemesan="<?=$dataOrder['pengorder']?>"
+                                data-pengorder="<?=$dataOrder['pengorder']?>"
                                 data-tgl_created="<?=$dataOrder['tgl_created']?>"
+                                data-unit_kerja="<?=$dataOrder['unit_kerja']?>"
                                 data-batas_waktu="<?=$dataOrder['batas_waktu']?>"
                                 data-disetujui="<?=$dataOrder['disetujui']?>"
                                 data-nospk="<?=$dataOrder['no_spk']?>"
@@ -170,7 +170,7 @@ $this->section('content');
                                 data-record_order="<?=$dataOrder['record_order']?>"
                                 data-nama_pelaksana="<?=$dataOrder['nama_pelaksana']?>"
                                 data-catatan="<?=$dataOrder['catatan']?>"
-                                ">Edit</a>
+                                >Edit</a>
                                 <a href="#"  data-href="/Order/deleteOrder/<?=$dataOrder['id_orderlog']?>" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="p-2 btn btn-danger"><i class='fs-4 bx bxs-trash'></i></a>
                             </td>
                         </tr>
@@ -231,12 +231,11 @@ $this->section('content');
                             <select name="approval_status" name="disetujui" class="form-control" id="disetujui">
                                 <option value="1">Ya</option>
                                 <option value="0">Tidak</option>
-                                <option value="2">Belum Disetujui</option>
                             </select>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Pembebanan</label>
-                            <input type="text" class="form-control" id="id_spk" name="no_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id ?? '0'), 4, '0', STR_PAD_LEFT);?>">
+                            <input type="text" class="form-control" id="no_spk" name="no_spk" value="PM<?=substr(date("Y"), -2);?><?=str_pad(($latest_id ?? '0'), 4, '0', STR_PAD_LEFT);?>">
                         </div>  
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">Jumlah/Satuan</label>
@@ -354,9 +353,15 @@ $this->section('content');
                     </div>    
                     <div class="tab_edit">
                         <div class="mb-1">
-                            <label for="" class="text-uppercase form-label">Disetujui</label>
+                            <!-- <label for="" class="text-uppercase form-label">Disetujui</label>
                             <input type="text" name="edit_disetujui" class="form-control" id="edit_disetujui"
-                            disabled>
+                            disabled> -->
+
+                            <label for="disetujui" class="text-uppercase form-label">Disetujui</label>
+                            <select name="approval_status" class="form-control" id="edit_disetujui">
+                                <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
+                            </select>
                         </div>
                         <div class="mb-1">
                             <label for="" class="text-uppercase form-label">No. Pembebanan</label>
@@ -603,13 +608,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
 
         // Get data from button edit
         const id_orderlog = $(this).data('id_orderlog');
-        const pemesan = $(this).data('pengorder');
+        const pengorder = $(this).data('pengorder');
         const tgl_created = $(this).data('tgl_created');
-        const id_worker = $(this).data('unit_kerja');
+        const unit_kerja = $(this).data('unit_kerja');
         const batas_waktu = $(this).data('batas_waktu');
         const disetujui = $(this).data('disetujui');
-        const id = $(this).data('no_spk');
-        const nospk = $(this).data('nospk');
+        const no_spk = $(this).data('no_spk');
         const jml_satuan = $(this).data('jml_satuan');
         const nama_barang = $(this).data('nama_barang');
         const no_barang = $(this).data('no_barang');
@@ -625,13 +629,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
 
         // Set data to Form Edit
         $('#edit_id_orderlog').val(id_orderlog);
-        $('#edit_pemesan').val(pemesan);
+        $('#edit_pengorder').val(pengorder);
         $('#edit_tgl_created').val(tgl_created);
-        $('#edit_id_worker').val(id_worker);
+        $('#edit_unit_kerja').val(unit_kerja);
         $('#edit_batas_waktu').val(batas_waktu);
         $('#edit_disetujui').val(disetujui);
-        $('#edit_id_spk').val(no_spk);
-        $('#idspk').val(id);
+        $('#edit_no_spk').val(no_spk);
         $('#edit_jml_satuan').val(jml_satuan);
         $('#edit_nama_barang').val(nama_barang);
         $('#edit_no_barang').val(no_barang);
